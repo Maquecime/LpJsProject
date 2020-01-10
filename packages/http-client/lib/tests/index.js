@@ -34,4 +34,15 @@ describe('Test API', () => {
             })
         });
     });
+
+    describe('Test FindOne', ()=>{
+        it('test /',async () =>{
+            fetchMock.get('http://localhost:5080/api/rockets/1',[{id:'1', name:'fusee', country:'france', takeOffThrust:'5'},{id:'2', name:'fusee2', country:'france', takeOffThrust:'5'},{id:'3', name:'fusee3', country:'france', takeOffThrust:'5'}]);
+            const client = httpclient('localhost', 5080);
+            client.findOne('1').then((changes)=>{
+                expect(changes).to.eql([{id:'1',name:'fusee',country:'france',takeOffThrust:'5'}]);
+            })
+
+        })
+    })
 });

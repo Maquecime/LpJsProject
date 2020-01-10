@@ -17,8 +17,18 @@ module.exports = function(host, port) {
         }).then(resolve).catch(reject)
         });
     }
+
+    function findOne(id){
+        return new Promise((resolve,reject) => {
+        fetch(`http://${host}:${port}/api/rockets/${id}`,{
+            method:'get', 
+        }).then(resolve).catch(reject)
+        });
+    }
+
     return {
         getAll: getAll,
-        add: add
+        add: add,
+        findOne: findOne
     }
 }
