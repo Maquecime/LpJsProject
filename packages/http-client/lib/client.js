@@ -1,33 +1,39 @@
 module.exports = function(host, port) {
     
-    function getAll() {
+    function findAll() {
         return new Promise((resolve, reject) => {
-            fetch(`http://${host}:${port}/api/change`)
+            fetch(`http://${host}:${port}/api/rockets`)
                 .then((response) => {
                     resolve(response.json());
                 })
                 .catch(reject)
         });
     }
-    function add() {
+
+    function add(object) {
         return new Promise((resolve, reject) => {
-            fetch('http://localhost:7890/api/change', {
+            fetch(`http://${host}:${port}/api/rockets`, {
             method: 'post',
-            body: JSON.stringify({eee: "uuuuu"})
-        }).then(resolve).catch(reject)
+            body: object
+            }).then((response) => {
+                resolve(response.json());
+            })
+            .catch(reject)
         });
     }
 
     function findOne(id){
         return new Promise((resolve,reject) => {
-        fetch(`http://${host}:${port}/api/rockets/${id}`,{
-            method:'get', 
-        }).then(resolve).catch(reject)
+            fetch(`http://${host}:${port}/api/rockets/${id}`)
+            .then((response) => {
+                resolve(response.json());
+            })
+            .catch(reject)
         });
     }
 
     return {
-        getAll: getAll,
+        findAll: findAll,
         add: add,
         findOne: findOne
     }
