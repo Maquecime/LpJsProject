@@ -3,7 +3,6 @@ const morgan = require('morgan');
 const uuid = require('uuidv4');
 const bodyParser = require('body-parser')
 const maDal = require('./dal/rockets_dal')
-console.log(maDal.deleteRocket)
 
 const { Pool } = require('pg')
 
@@ -13,73 +12,57 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 app.get('/api/rockets', (req, res) => {
-    const pool = new Pool({
-        user: 'db_user',
-        host: 'database',
-        database: 'db_db',
-        password: 'db_password'
-      })
-    pool.query('SELECT * FROM rockets', (err, result) => {
-        pool.end()        
-            res.json(result.rows)
-        });
+    maDal.getAllRockets().then((answ)=>{
+        res.json(answ.rows)
+    }).catch((err)=>{
+        console.log(err);
+        res.status(500).send(err);
+    });
         
-    })
+})
 
 app.post('/api/rockets', (req, res) =>{
-    const pool = new Pool({
-        user: 'db_user',
-        host: 'database',
-        database: 'db_db',
-        password: 'db_password'
-    })
-    let uuid2 = uuid.uuid()
-    pool.query('INSERT INTO rockets(id,name,country,takeOffThrust) VALUES($1,$2,$3,$4);', 
-    [uuid2,req.body.name, req.body.country, req.body.takeOffThrust], 
-    (err, result) => {
-        if(err != undefined) {
-            res.status(400).send(err);
-        }
-        const formattedResult = {id:uuid2, ...req.body}
-        pool.end()
-            res.status(201).json(formattedResult)
+    let myNewRocket = {...req.body}
+    maDal.insertRocket(myNewRocket).then((answ)=>{
+        let formattedResult = {id:answ, ...req.body}
+        res.status(201).json(formattedResult);
+    }).catch(err =>{
+        res.status(500).send(err);
     });
 })
 
 app.put('/api/rockets/:id', (req, res) =>{
-        const pool = new Pool({
-        user: 'db_user',
-        host: 'database',
-        database: 'db_db',
-        password: 'db_password'
-    })
-    pool.query('UPDATE rockets SET name=$1, country=$2, takeOffThrust=$3 WHERE id=$4;', 
-    [req.body.name, req.body.country, req.body.takeOffThrust,req.params.id], 
-    (err, result) => {
-        if(err != undefined) {
-            res.status(400).send(err);
+    if(!req.params.id){
+        res.status(400).send();
+    }
+    // if(uuid.isUuid(req.params.id)){
+    //     res.status(400).send()
+    // }
+    let myNewRocket = {id:req.params.id, ...req.body}
+    maDal.updateRocket(myNewRocket).then((answ)=>{
+        if(answ.rowCount > 0){
+            res.status(201).json(myNewRocket);
         }
-        const formattedResult = {id:req.params.id, ...req.body}
-        pool.end()
-            res.json(formattedResult)
+        else{
+            res.status(404).send()
+        }
+    }).catch(err =>{
+        res.status(500).send(err);
     });
 })
 
 app.get('/api/rockets/:id', (req, res) =>{
-    const pool = new Pool({
-        user: 'db_user',
-        host: 'database',
-        database: 'db_db',
-        password: 'db_password'
-    })
-    pool.query('SELECT * FROM rockets WHERE id=$1;', 
-    [req.params.id], 
-    (err, result) => {
-        if(err != undefined) {
-            res.status(404).send(err);
-        }
-        pool.end()
-            res.json(result.rows)
+    if(!req.params.id){
+        res.status(400).send();
+    }
+    // if(uuid.isUuid(req.params.id)){
+    //     res.status(400).send()
+    // }
+    maDal.getOneRocket(req.params.id).then((answ)=>{
+        res.json(answ)
+    }).catch((err)=>{
+        console.log(err);
+        res.status(500).send(err);
     });
 })
 
@@ -99,10 +82,5 @@ app.delete('/api/rockets/:id', (req,res) => {
     });
 })
 
-
-
-app.get('/api/test', (req, res) => {
-    res.send('Hello')
-})
 
 module.exports = app;
