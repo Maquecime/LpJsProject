@@ -7,9 +7,12 @@
         "uuidv4": "^6.0.2"
     },
     "devDependencies": {
-        "forever": "2.0.0"
+        "forever": "2.0.0",
+        "jest": "^25.1.0",
+        "supertest": "^4.0.2"
     },
     "scripts": {
-        "start": "node_modules/forever/bin/forever -t --w bin/index.js"
+        "start": "node_modules/forever/bin/forever -t --w bin/index.js",
+        "test": "jest"
     }
 }
