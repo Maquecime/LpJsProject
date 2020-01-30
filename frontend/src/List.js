@@ -16,9 +16,13 @@ export default class List extends React.Component {
           <h1>List</h1>
           <ul>
             { this.props.list.map(function(element, index) {
-              return <li key={ index }>{ element }</li>
-            })}
-          </ul>
+             
+                
+           
+            return <li key={ index }>Nom rocket: {element.name} Pays: {element.country} Décollage: {element.takeoffthrust} </li>})}
+            
+            
+              </ul>
           <Link to="/add">Add</Link>
         </div>
       );

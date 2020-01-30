@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import List from './List'
 import Add from './Add'
 
+
 import {
   Router,
   Switch,
@@ -27,7 +28,8 @@ export default class App extends Component  {
         event.preventDefault();
         history.push("/");
         this.setState((prevState, props) => {
-            prevState.list = [...prevState.list, data.get('name')]
+            prevState.list = [...prevState.list, {name: data.get('name'), country: data.get('country'), takeoffthrust: data.get('takeoffthrust')}]
+            
             return prevState
         })
     }
