@@ -1,23 +1,23 @@
 
-const { Pool } = require('pg')
+const { Pool } = require('pg');
 const uuid = require('uuidv4');
 const pool = new Pool({
         user:'db_user',
         host:'database',
         database: 'db_db',
         password: 'db_password'
-    })
+    });
 
-async function deleteRocket(uuid){
+async function deleteRocket(uuidReceived){
     let answ = await pool.query('DELETE FROM rockets WHERE id=$1;',
-    [uuid]).catch(err => {
+    [uuidReceived]).catch(err => {
         throw err;
     });
 }
 
-async function getOneRocket(uuid){
+async function getOneRocket(uuidReceived){
     let answ = await pool.query('SELECT * from rockets WHERE id=$1;',
-    [uuid]).catch(err => {
+    [uuidReceived]).catch(err => {
         throw err;
     });
     return answ.rows;
