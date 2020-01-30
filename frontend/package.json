@@ -9,6 +9,7 @@
         "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
         "@babel/preset-env": "^7.2.3",
         "@babel/preset-react": "^7.0.0",
+        "axios": "^0.19.2",
         "babel-loader": "^8.0.5",
         "babel-plugin-emotion": "^10.0.27",
         "file-loader": "^5.0.2",

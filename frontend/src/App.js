@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 
-import List from './List'
-import Add from './Add'
+import List from './List';
+import Add from './Add';
+import axios from 'axios';
 
 import {
   Router,
@@ -22,12 +23,19 @@ export default class App extends Component  {
         this.submit = this.submit.bind(this)
     }
 
+    componentDidMount() {
+        fetch(`/api/rockets`)
+          .then(res => res.json())
+          .then(list => {
+            this.setState(list)});
+      }
+
     submit(event) {
         const data = new FormData(event.target);
         event.preventDefault();
         history.push("/");
         this.setState((prevState, props) => {
-            prevState.list = [...prevState.list, data.get('name')]
+            prevState.list = []
             return prevState
         })
     }
