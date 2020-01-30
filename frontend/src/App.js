@@ -23,10 +23,12 @@ export default class App extends Component  {
     }
 
     componentDidMount() {
+        console.log('aaaaa');
         fetch(`/api/rockets`)
           .then(res => res.json())
           .then(list => {
-            this.setState(list)});
+            this.setState({list: list})
+        });
       }
 
     submit(event) {
