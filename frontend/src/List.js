@@ -19,7 +19,7 @@ export default class List extends React.Component {
              
                 
            
-            return <li key={ index }>Nom rocket: {element.name} Pays: {element.country} Décollage: {element.takeoffthrust} </li>})}
+            return <li key={ index }>Nom rocket: {element.name} Pays: {element.country} Décollage: {element.takeOffThrust} </li>})}
             
             
               </ul>

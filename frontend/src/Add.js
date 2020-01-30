@@ -13,7 +13,7 @@ export default class Add extends React.Component {
           <form onSubmit={this.props.submit}>
               <input name="name" type="text" placeholder="Enter name of Rocket"/>
               <input name="country" type="text" placeholder="Enter country"/>
-              <input name="takeoffthrust" type="text" placeholder="Enter take of thrust"/>
+              <input name="takeOffThrust" type="text" placeholder="Enter take of thrust"/>
               <button type="submit">Send</button>
           </form>
         </div>

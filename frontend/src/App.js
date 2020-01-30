@@ -36,7 +36,7 @@ export default class App extends Component  {
         event.preventDefault();
         history.push("/");
         this.setState((prevState, props) => {
-            prevState.list = [...prevState.list, {name: data.get('name'), country: data.get('country'), takeoffThrust: data.get('takeoffThrust')}];
+            prevState.list = [...prevState.list, {name: data.get('name'), country: data.get('country'), takeOffThrust: data.get('takeOffThrust')}];
             return prevState
         })
     }
