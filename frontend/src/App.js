@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import List from './List';
 import Add from './Add';
+import uuid from 'uuidv4';
 
 import {
   Router,
@@ -20,6 +21,7 @@ export default class App extends Component  {
         super(props)
         this.state = { list: [] }
         this.submit = this.submit.bind(this)
+        this.deleteRocket = this.deleteRocket.bind(this)
     }
 
     componentDidMount() {
@@ -36,10 +38,15 @@ export default class App extends Component  {
         event.preventDefault();
         history.push("/");
         this.setState((prevState, props) => {
-            prevState.list = [...prevState.list, {name: data.get('name'), country: data.get('country'), takeOffThrust: data.get('takeOffThrust')}];
+            prevState.list = [...prevState.list, {id: uuid.uuid(), name: data.get('name'), country: data.get('country'), takeOffThrust: data.get('takeOffThrust')}];
             return prevState
         })
     }
+
+    deleteRocket(id) {
+        const list = this.state.list.filter( item => item.id !== id );
+        this.setState({list: list});
+      }
 
     render () {
         return (
@@ -49,7 +56,7 @@ export default class App extends Component  {
                         <Add submit={this.submit} />
                     </Route>
                     <Route exact path="/">
-                        <List list={ this.state.list }/>
+                        <List list={ this.state.list } deleteRocket={this.deleteRocket}/>
                     </Route>
                 </Switch>
             </Router>

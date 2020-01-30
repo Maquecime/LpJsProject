@@ -15,14 +15,14 @@ export default class List extends React.Component {
         <div>
           <h1>List</h1>
           <ul>
-            { this.props.list.map(function(element, index) {
-             
-                
-           
-            return <li key={ index }>Nom rocket: {element.name} Pays: {element.country} Décollage: {element.takeOffThrust} </li>})}
-            
-            
-              </ul>
+            { this.props.list.map((element, index) => {           
+                return <li key={ element.id }>
+                        Nom rocket: {element.name} Pays: {element.country} Décollage: {element.takeOffThrust}
+                        <button className="btn btn-danger ml-2" onClick={() => this.props.deleteRocket(element.id) }>x</button>
+                        </li>
+                })                    
+            }           
+          </ul>
           <Link to="/add">Add</Link>
         </div>
       );
