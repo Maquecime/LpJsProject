@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import List from './List';
 import Add from './Add';
-import axios from 'axios';
 
 import {
   Router,
