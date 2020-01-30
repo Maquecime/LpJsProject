@@ -18,7 +18,6 @@ app.get('/api/rockets', (req, res) => {
         console.log(err);
         res.status(500).send(err);
     });
-        
 })
 
 app.post('/api/rockets', (req, res) =>{
