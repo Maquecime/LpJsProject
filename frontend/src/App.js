@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import List from './List';
 import Add from './Add';
-import uuid from 'uuidv4';
+const uuid = require('uuidv4');
 
 import {
   Router,
@@ -25,7 +25,6 @@ export default class App extends Component  {
     }
 
     componentDidMount() {
-        console.log('aaaaa');
         fetch(`/api/rockets`)
           .then(res => res.json())
           .then(list => {
