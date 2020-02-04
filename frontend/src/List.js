@@ -19,6 +19,8 @@ export default class List extends React.Component {
                 return <li key={ element.id }>
                         Nom rocket: {element.name} Pays: {element.country} Décollage: {element.takeOffThrust}
                         <button className="btn btn-danger ml-2" onClick={() => this.props.deleteRocket(element.id) }>x</button>
+                        <Link to={`/edit/${element.id}`} >Edit</Link>
+
                         </li>
                 })                    
             }           
