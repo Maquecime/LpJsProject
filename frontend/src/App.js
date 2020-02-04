@@ -4,6 +4,8 @@ import List from './List';
 import Add from './Add';
 import Edit from './Edit';
 const uuid = require('uuidv4');
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import {
   Router,
@@ -49,6 +51,10 @@ export default class App extends Component  {
         event.preventDefault();
         history.push("/");
         const objIndex = this.state.list.findIndex((rocket => rocket.id === id));
+        console.log(id);
+        console.log(data.get("name"));
+        console.log(data.get("country"));
+        console.log(data.get("takeOffThrust"));
 
         this.setState((prevState, props) => {
             prevState.list[objIndex].name = data.get("name");
