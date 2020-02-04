@@ -44,19 +44,18 @@ export default class App extends Component  {
         })
     }
 
-    update(event){
+    update(event, id){
         const data = new FormData(event.target);
         event.preventDefault();
-        console.log(data.get("name"));
-        // history.push("/");
-        // const objIndex = this.state.list.findIndex((rocket => rocket.id === id));
+        history.push("/");
+        const objIndex = this.state.list.findIndex((rocket => rocket.id === id));
 
-        // this.setState((prevState, props) => {
-        //     prevstate.list[objIndex].name = data.get("name");
-        //     prevstate.list[objIndex].country = data.get("country");
-        //     prevstate.list[objIndex].takeOffThrust = data.get("takeOffThrust");
-        //     return prevState;
-        // })
+        this.setState((prevState, props) => {
+            prevState.list[objIndex].name = data.get("name");
+            prevState.list[objIndex].country = data.get("country");
+            prevState.list[objIndex].takeOffThrust = data.get("takeOffThrust");
+            return prevState;
+        })
     }
 
     deleteRocket(id) {
