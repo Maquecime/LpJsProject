@@ -74,7 +74,7 @@ app.delete('/api/rockets/:id', (req,res) => {
     // }
     maDal.deleteRocket(req.params.id).then(()=>{
         const formattedResult={id:req.params.id}
-        res.json(formattedResult)
+        res.status(204).json(formattedResult);
     }).catch((err)=>{
         console.log(err);
         res.status(500).send(err);

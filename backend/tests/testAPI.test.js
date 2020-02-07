@@ -24,7 +24,7 @@ describe('POST /api/rockets', function() {
     if(idReceived){
       maDal.deleteRocket(idReceived).then(()=>{
       }).catch((err)=>{
-      });      
+      });
     }
   })
   it('responds with json', function(done) {
@@ -47,9 +47,10 @@ describe('UPDATE /api/rockets', function(){
   let originalRocket = {name:'testName', country:'testCountry', takeOffThrust:0};
   let modified = {name:'testNameModified', country:'testCountryModified', takeOffThrust:10};
 
-  beforeAll(()=>{
+  beforeAll((done)=>{
     maDal.insertRocket(originalRocket).then((answ)=>{
       generatedUuid = answ;
+      done();
     }).catch(()=>{
       runTest=false;
     });     
@@ -62,20 +63,20 @@ describe('UPDATE /api/rockets', function(){
       }).catch(err =>{});
     }
   });
-
-  if(runTest){
     describe('Post Endpoints', () => {
       it('should update the rocket', async () => {
-        const res = await request(app)
-          .put(`/api/rockets/${generatedUuid}`)
-          .send(modified)
-          .set('Accept','application/json');
-        expect(res.statusCode).toEqual(201)
-        expect(res.body.name).toEqual('testNameModified')
-        expect(res.body.takeOffThrust).toBe(10)
+        if(runTest) {
+          console.log('run');
+          const res = await request(app)
+              .put(`/api/rockets/${generatedUuid}`)
+              .send(modified)
+              .set('Accept', 'application/json');
+          expect(res.statusCode).toEqual(201);
+          expect(res.body.name).toEqual('testNameModified');
+          expect(res.body.takeOffThrust).toBe(10);
+        }
       })
     })
-  }
   });
 
 describe('DELETE /api/rockets', function(){
@@ -83,35 +84,37 @@ describe('DELETE /api/rockets', function(){
   let runTest = true;
   let originalRocket = {name:'testName', country:'testCountry', takeOffThrust:0};
 
-  beforeAll(()=>{
+  beforeAll((done)=>{
     maDal.insertRocket(originalRocket).then((answ)=>{
       generatedUuid = answ;
+      done();
     }).catch(()=>{
       runTest=false;
     });     
   });
 
-  if(runTest){
     describe('DELETE Endpoints', () => {
       it('should delete the rocket', async () => {
-        const res = await request(app)
-          .delete(`/api/rockets/${generatedUuid}`)
-          .set('Accept','application/json');
-        expect(res.statusCode).toEqual(204)
+        if(runTest) {
+          const res = await request(app)
+              .delete(`/api/rockets/${generatedUuid}`)
+              .set('Accept', 'application/json');
+          expect(res.statusCode).toEqual(204);
+        }
       })
     })
-  }
 });
+
 
 describe('GET /api/rockets', function(){
   let generatedUuid;
   let runTest = true;
   let originalRocket = {name:'testName', country:'testCountry', takeOffThrust:0};
 
-  beforeAll(()=>{
+  beforeAll((done)=>{
     maDal.insertRocket(originalRocket).then((answ)=>{
-      console.log(answ);
       generatedUuid = answ;
+      done();
     }).catch(()=>{
       runTest=false;
     });     
@@ -125,16 +128,18 @@ describe('GET /api/rockets', function(){
     }
   });
 
-  if(runTest){
     describe('Get Endpoints', () => {
       it('should get the rocket', async () => {
-        const res = await request(app)
-          .get(`/api/rockets/${generatedUuid}`)
-          .set('Accept','application/json');
-        expect(res.statusCode).toEqual(201)
-        expect(res.body.name).toEqual('testName')
-        expect(res.body.takeOffThrust).toBe(0)
+        if(runTest) {
+
+          const res = await request(app)
+              .get(`/api/rockets/${generatedUuid}`)
+              .set('Accept', 'application/json');
+          console.log(res.body)
+          expect(res.statusCode).toEqual(200);
+          expect(res.body[0].name).toEqual('testName');
+          expect(res.body[0].takeoffthrust).toBe('0');
+        }
       })
     })
-  }
 });

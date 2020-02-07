@@ -20,12 +20,6 @@ export default class Edit extends React.Component {
       return (
         <Col md={6} className="justify-content-around offset-3">
           <h1>Edit</h1>
-              {/*<form onSubmit={(event) => this.props.updateRocket(event, this.state.rocketId)}>*/}
-              {/*    <input name="name" type="text" placeholder="Enter name of Rocket" defaultValue={this.state.updated.name}/>*/}
-              {/*    <input name="country" type="text" placeholder="Enter country" defaultValue={this.state.updated.country}/>*/}
-              {/*    <input name="takeOffThrust" type="text" placeholder="Enter take of thrust" defaultValue={this.state.updated.takeOffThrust}/>*/}
-              {/*    <button type="submit">Send</button>*/}
-              {/*</form>*/}
             <Form onSubmit={(event) => this.props.updateRocket(event, this.state.rocketId)}>
                 <Row>
                     <Col>
@@ -35,7 +29,7 @@ export default class Edit extends React.Component {
                         <Form.Control required name="country" type="text" placeholder="Enter country of Rocket" defaultValue={this.state.updated.country} />
                     </Col>
                     <Col>
-                        <Form.Control required name="takeOffThrust" type="text" placeholder="Enter take off thrust" defaultValue={this.state.updated.takeOffThrust}/>
+                        <Form.Control required name="takeoffthrust" type="text" placeholder="Enter take off thrust" defaultValue={this.state.updated.takeoffthrust}/>
                     </Col>
                     <Col md={1}>
                         <Button type="submit">Submit</Button>

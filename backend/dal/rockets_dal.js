@@ -43,7 +43,7 @@ async function insertRocket(rocket){
     let answ = await pool.query('INSERT INTO rockets(id,name,country,takeOffThrust) VALUES($1,$2,$3,$4);',
     [newUuid,rocket.name, rocket.country, rocket.takeOffThrust]).catch(err =>{
         throw err;
-    })
+    });
     return newUuid;
 }
 
@@ -53,4 +53,4 @@ module.exports={
     getOneRocket:getOneRocket,
     updateRocket:updateRocket,
     insertRocket:insertRocket
-}
+};

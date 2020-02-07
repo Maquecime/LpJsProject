@@ -21,18 +21,18 @@ const history = createBrowserHistory();
 export default class App extends Component  {
 
     constructor(props) {
-        super(props)
-        this.state = { list: [] }
-        this.submit = this.submit.bind(this)
+        super(props);
+        this.state = { list: [] };
+        this.submit = this.submit.bind(this);
         this.update = this.update.bind(this);
-        this.deleteRocket = this.deleteRocket.bind(this)
+        this.deleteRocket = this.deleteRocket.bind(this);
     }
 
     componentDidMount() {
         fetch(`/api/rockets`)
           .then(res => res.json())
           .then(list => {
-            this.setState({list: list})
+              this.setState({list: list})
         });
       }
 
@@ -41,7 +41,7 @@ export default class App extends Component  {
         event.preventDefault();
         history.push("/");
         this.setState((prevState, props) => {
-            prevState.list = [...prevState.list, {id: uuid.uuid(), name: data.get('name'), country: data.get('country'), takeOffThrust: data.get('takeOffThrust')}];
+            prevState.list = [...prevState.list, {id: uuid.uuid(), name: data.get('name'), country: data.get('country'), takeoffthrust: data.get('takeoffthrust')}];
             return prevState
         })
     }
@@ -54,12 +54,12 @@ export default class App extends Component  {
         console.log(id);
         console.log(data.get("name"));
         console.log(data.get("country"));
-        console.log(data.get("takeOffThrust"));
+        console.log(data.get("takeoffthrust"));
 
         this.setState((prevState, props) => {
             prevState.list[objIndex].name = data.get("name");
             prevState.list[objIndex].country = data.get("country");
-            prevState.list[objIndex].takeOffThrust = data.get("takeOffThrust");
+            prevState.list[objIndex].takeoffthrust = data.get("takeoffthrust");
             return prevState;
         })
     }
