@@ -19,8 +19,6 @@ import Client from '../client/lib/client.js';
 
 const client = Client("localhost",8080);
 
-console.log(client);
-
 const history = createBrowserHistory();
 
 export default class App extends Component  {
@@ -46,9 +44,9 @@ export default class App extends Component  {
         event.preventDefault();
         history.push("/");
         const newRocket = {name: data.get("name"), country: data.get("country"), takeOffThrust: data.get("takeOffThrust")};
-        let newId = uuid.uuid();
+        let newId;
         client.add(newRocket).then(res =>{
-            console.log(res);
+            newId = res.id;
         });
         this.setState((prevState, props) => {
             prevState.list = [...prevState.list, {id: newId, ...newRocket}];

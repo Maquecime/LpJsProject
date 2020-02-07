@@ -1,8 +1,10 @@
 module.exports = function(host, port) {
-    
-    function findAll() {
+        function findAll() {
+
+        let url = `http://${host}:${port}`;
+
         return new Promise((resolve, reject) => {
-            fetch(`http://${host}:${port}/api/rockets`)
+            fetch(`${url}/api/rockets`)
                 .then((response) => {
                     resolve(response.json());
                 })
@@ -11,11 +13,14 @@ module.exports = function(host, port) {
     }
 
     function add(object) {
-        console.log(JSON.stringify(object));
+        let url = `http://${host}:${port}`;
         return new Promise((resolve, reject) => {
-            fetch(`http://${host}:${port}/api/rockets`, {
+            fetch(`${url}/api/rockets`, {
             method: "post",
-            body: JSON.stringify(object)
+            body: JSON.stringify(object),
+                headers: {
+                    "Content-Type": "application/json"
+                }
             }).then((response) => {
                 resolve(response.json());
             })
@@ -24,8 +29,10 @@ module.exports = function(host, port) {
     }
 
     function findOne(id){
+        let url = `http://${host}:${port}`;
+
         return new Promise((resolve,reject) => {
-            fetch(`http://${host}:${port}/api/rockets/${id}`)
+            fetch(`${url}/api/rockets/${id}`)
             .then((response) => {
                 resolve(response.json());
             })
@@ -34,10 +41,15 @@ module.exports = function(host, port) {
     }
     
     function update(id,object) {
+
+        let url = `http://${host}:${port}`;
+
+
         return new Promise((resolve, reject) =>{
-            fetch(`http://${host}:${port}/api/rockets/${id}`, {
+            fetch(`${url}/api/rockets/${id}`, {
                 method:"put",
-                body:object
+                headers: {"Content-Type": "application/json"}
+                body:JSON.stringify(object)
             }) .then((response) =>{
                 resolve(response.json());
             }).catch(reject)
@@ -45,8 +57,12 @@ module.exports = function(host, port) {
     }
 
     function deleteRocket(id) {
+
+        let url = `http://${host}:${port}`;
+
+
         return new Promise((resolve, reject) =>{
-            fetch(`http://${host}:${port}/api/rockets/${id}`, {
+            fetch(`${url}/api/rockets/${id}`, {
                 method: "delete"
             }).then((response) =>{
                 resolve(response.json());
@@ -61,4 +77,4 @@ module.exports = function(host, port) {
         updateRocket: update,
         deleteRocket: deleteRocket
     }
-}
+};
