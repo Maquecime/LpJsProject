@@ -6,6 +6,7 @@ import {
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
+import "../styles/List.css";
 
 export default class List extends React.Component {
 

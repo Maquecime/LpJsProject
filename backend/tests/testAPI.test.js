@@ -135,7 +135,6 @@ describe('GET /api/rockets', function(){
           const res = await request(app)
               .get(`/api/rockets/${generatedUuid}`)
               .set('Accept', 'application/json');
-          console.log(res.body)
           expect(res.statusCode).toEqual(200);
           expect(res.body[0].name).toEqual('testName');
           expect(res.body[0].takeoffthrust).toBe('0');

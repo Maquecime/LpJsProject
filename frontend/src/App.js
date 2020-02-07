@@ -47,7 +47,7 @@ export default class App extends Component  {
     }
 
     update(event, id){
-        const data = new FormData(event.target);
+        const data = new FormData(event.target);    
         event.preventDefault();
         history.push("/");
         const objIndex = this.state.list.findIndex((rocket => rocket.id === id));
