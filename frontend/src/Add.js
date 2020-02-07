@@ -23,7 +23,7 @@ export default class Add extends React.Component {
                             <Form.Control required name="country" type="text" placeholder="Enter country of Rocket"/>
                         </Col>
                         <Col>
-                            <Form.Control required name="takeoffthrust" type="text" placeholder="Enter take off thrust"/>
+                            <Form.Control required name="takeOffThrust" type="text" placeholder="Enter take off thrust"/>
                         </Col>
                         <Col md={1}>
                             <Button type="submit">Add</Button>

@@ -31,7 +31,7 @@ async function getAllRockets(){
 }
 
 async function updateRocket(rocket){
-    let answ = await pool.query('UPDATE rockets SET name=$1 ,country=$2 ,takeOffThrust=$3 WHERE id=$4;',
+    let answ = await pool.query('UPDATE rockets SET "name"=$1 ,"country"=$2 ,"takeOffThrust"=$3 WHERE "id"=$4;',
     [rocket.name, rocket.country, rocket.takeOffThrust, rocket.id]).catch(err =>{
         throw err;
     });
@@ -39,8 +39,8 @@ async function updateRocket(rocket){
 }
 
 async function insertRocket(rocket){
-    const newUuid = uuid.uuid()
-    let answ = await pool.query('INSERT INTO rockets(id,name,country,takeOffThrust) VALUES($1,$2,$3,$4);',
+    const newUuid = uuid.uuid();
+    let answ = await pool.query('INSERT INTO rockets("id","name","country","takeOffThrust") VALUES($1,$2,$3,$4);',
     [newUuid,rocket.name, rocket.country, rocket.takeOffThrust]).catch(err =>{
         throw err;
     });

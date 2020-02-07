@@ -37,7 +37,7 @@ export default class List extends React.Component {
                         <tr>
                             <td>{element.name}</td>
                             <td>{element.country}</td>
-                            <td>{element.takeoffthrust}</td>
+                            <td>{element.takeOffThrust}</td>
                             <td>
                                 <Link className="btn btn-primary" to={`/edit/${element.id}`} >Edit</Link>
                                 <button className="btn btn-danger ml-2" onClick={() => this.props.deleteRocket(element.id) }>x</button>

@@ -15,6 +15,11 @@ import {
 
 
 import { createBrowserHistory } from 'history';
+import Client from '../client/lib/client.js';
+
+const client = Client("localhost",8080);
+
+console.log(client);
 
 const history = createBrowserHistory();
 
@@ -29,42 +34,50 @@ export default class App extends Component  {
     }
 
     componentDidMount() {
-        fetch(`/api/rockets`)
-          .then(res => res.json())
-          .then(list => {
-              this.setState({list: list})
-        });
+        client.findAll()
+          .then(
+              res =>{
+                  this.setState({list: res})
+              });
       }
 
     submit(event) {
         const data = new FormData(event.target);
         event.preventDefault();
         history.push("/");
+        const newRocket = {name: data.get("name"), country: data.get("country"), takeOffThrust: data.get("takeOffThrust")};
+        let newId = uuid.uuid();
+        client.add(newRocket).then(res =>{
+            console.log(res);
+        });
         this.setState((prevState, props) => {
-            prevState.list = [...prevState.list, {id: uuid.uuid(), name: data.get('name'), country: data.get('country'), takeoffthrust: data.get('takeoffthrust')}];
+            prevState.list = [...prevState.list, {id: newId, ...newRocket}];
             return prevState
         })
     }
 
     update(event, id){
-        const data = new FormData(event.target);    
+        const data = new FormData(event.target);
         event.preventDefault();
         history.push("/");
         const objIndex = this.state.list.findIndex((rocket => rocket.id === id));
-        console.log(id);
-        console.log(data.get("name"));
-        console.log(data.get("country"));
-        console.log(data.get("takeoffthrust"));
+        const rocketUpdated = {name: data.get("name"), country: data.get("country"), takeOffThrust: data.get("takeOffThrust")};
+/*        fetch(`http://localhost:8080/api/rockets/${id}`, {
+            method:"put",
+            headers: {"Content-Type" : "application/json"},
+            body: JSON.stringify(rocketUpdated)
+        });*/
 
         this.setState((prevState, props) => {
-            prevState.list[objIndex].name = data.get("name");
-            prevState.list[objIndex].country = data.get("country");
-            prevState.list[objIndex].takeoffthrust = data.get("takeoffthrust");
+            prevState.list[objIndex] = rocketUpdated;
             return prevState;
         })
     }
 
     deleteRocket(id) {
+/*        fetch(`http://localhost:8080/api/rockets/${id}`, {
+            method: "delete"
+        });*/
         const list = this.state.list.filter( item => item.id !== id );
         this.setState({list: list});
       }

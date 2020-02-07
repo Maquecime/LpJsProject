@@ -21,7 +21,7 @@ app.get('/api/rockets', (req, res) => {
 })
 
 app.post('/api/rockets', (req, res) =>{
-    let myNewRocket = {...req.body}
+    let myNewRocket = {...req.body};
     maDal.insertRocket(myNewRocket).then((answ)=>{
         let formattedResult = {id:answ, ...req.body}
         res.status(201).json(formattedResult);
@@ -79,7 +79,7 @@ app.delete('/api/rockets/:id', (req,res) => {
         console.log(err);
         res.status(500).send(err);
     });
-})
+});
 
 
 module.exports = app;

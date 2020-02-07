@@ -29,7 +29,7 @@ export default class Edit extends React.Component {
                         <Form.Control required name="country" type="text" placeholder="Enter country of Rocket" defaultValue={this.state.updated.country} />
                     </Col>
                     <Col>
-                        <Form.Control required name="takeoffthrust" type="text" placeholder="Enter take off thrust" defaultValue={this.state.updated.takeoffthrust}/>
+                        <Form.Control required name="takeOffThrust" type="text" placeholder="Enter take off thrust" defaultValue={this.state.updated.takeOffThrust}/>
                     </Col>
                     <Col md={1}>
                         <Button type="submit">Submit</Button>

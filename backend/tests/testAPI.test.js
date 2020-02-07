@@ -137,7 +137,7 @@ describe('GET /api/rockets', function(){
               .set('Accept', 'application/json');
           expect(res.statusCode).toEqual(200);
           expect(res.body[0].name).toEqual('testName');
-          expect(res.body[0].takeoffthrust).toBe('0');
+          expect(res.body[0].takeOffThrust).toBe('0');
         }
       })
     })

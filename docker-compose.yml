@@ -51,6 +51,7 @@ services:
         build: .dont_touch/docker/frontend
         volumes: 
             - ./frontend/:/var/www/app
+            - ./packages/http-client/:/var/www/app/client
         networks: 
             - main
     database:
