@@ -48,7 +48,7 @@ module.exports = function(host, port) {
         return new Promise((resolve, reject) =>{
             fetch(`${url}/api/rockets/${id}`, {
                 method:"put",
-                headers: {"Content-Type": "application/json"}
+                headers: {"Content-Type": "application/json"},
                 body:JSON.stringify(object)
             }) .then((response) =>{
                 resolve(response.json());
